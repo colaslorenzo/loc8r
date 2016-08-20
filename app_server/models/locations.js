@@ -15,12 +15,15 @@ var reviewSchema = new mongoose.Schema({
 });
 
 var locationSchema = new mongoose.Schema({
-  name: {type: String, required: true},
+  //name: {type: String, required: true},
+  name: String,
   address: String,
-  rating: {type: Number, "default": 0, min: 0, max: 5},
-  coords: {type: [Number], index: '2dsphere'},
-  openingTimes: [openingTimeSchema],
-  reviews: [reviewSchema]
+  rating: {type: Number, "default": 0, min: 0, max: 5}
+  //coords: {type: [Number], index: '2dsphere'},
+  coords_lng: Number,
+  coords_lat: Number,
+  //openingTimes: [openingTimeSchema],
+  //reviews: [reviewSchema]
 });
 
 mongoose.model('Location', locationSchema);

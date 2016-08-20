@@ -74,6 +74,14 @@ var buildLocationList = function(req, res, results, stats) {
 };
 
 /* GET a location by the id */
+module.exports.locationsReadAll = function(req, res) {
+  console.log('gsus: locationsReadAll', req.params);
+  Loc.find().exec(function(err, location_list) {
+        console.log(location_list);
+        sendJSONresponse(res, 200, location_list);
+  });
+};
+
 module.exports.locationsReadOne = function(req, res) {
   console.log('Finding location details', req.params);
   if (req.params && req.params.locationid) {
@@ -108,8 +116,10 @@ module.exports.locationsCreate = function(req, res) {
   Loc.create({
     name: req.body.name,
     address: req.body.address,
-    facilities: req.body.facilities.split(","),
-    coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
+    //facilities: req.body.facilities.split(","),
+    facilities: req.body.facilities,
+    coords_lng: parseFloat(req.body.lng),
+    coords_lat: parseFloat(req.body.lat),
     openingTimes: [{
       days: req.body.days1,
       opening: req.body.opening1,
