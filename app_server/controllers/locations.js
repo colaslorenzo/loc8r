@@ -2,11 +2,11 @@ var request = require('request')
 var apiOptions = {
   server: "http://192.168.1.105:3000"
 };
-if (process.env.NODE_ENV === 'local') {
-  apiOptions.server = "http://192.168.1.105:5000";
-}
 if (process.env.NODE_ENV === 'production') {
   apiOptions.server = "https://peaceful-cliffs-12990.herokuapp.com";
+}
+else {
+  apiOptions.server = process.env.NODE_ENV;
 }
 /* GET 'home' page */
 var renderHomepage = function(req, res, responseBody) {
